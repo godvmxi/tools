@@ -1,0 +1,82 @@
+#!/bin/bash
+START_UP_PROFILE=/etc/rc.local
+
+if [ $# -lt 4 ] ; then
+cat<<HELP
+USAGE : install url user pass device
+please run in root shell
+the start script was install in the /etc/rc.local 
+delete the line and stop the service
+the free dynamic domain name can be register in -> http://www.oray.com
+the device should be the eth0 or eth1 and sn on
+thanks Wenbo Wang
+HELP
+exit 0
+fi 
+rm -rf .tmp
+DDNS_URL=$1
+DDNS_USER=$2
+DDNS_PASS=$3
+NET_DEVICE=$4
+echo "ddns url   ->  ${DDNS_URL}"
+echo "ddns user  ->  ${DDNS_USER}"
+echo "ddns pass  ->  ${DDNS_PASS}"
+echo "ddns net device  ->  ${NET_DEVICE}"
+echo "please check the data is whether is right and you can use ^+c to stop the install and correct the data"
+echo "Or press any key to continue"
+read -n 1 -p "Press any key to continue..." 
+echo "start instal the service and get necesary app curl  please input yes when necessarg"
+sleep 2
+#you can change the follow two lines command 
+apt-get update
+apt-get install curl
+
+echo "#!/bin/bash" >> .tmp
+echo "VICP_URL=${DDNS_URL}" >> .tmp
+echo "VICP_USER=${DDNS_USER}" >> .tmp
+echo "VICP_PASS=${DDNS_PASS}" >> .tmp
+echo "NET_DEVICE=${NET_DEVICE}" >> .tmp
+cat ddns >> .tmp
+chmod +x .tmp
+cp -rf .tmp /bin/ddnsClient
+
+PROFILE_FLAG=`cat ${START_UP_PROFILE}|grep "/bin/ddnsClient &"`
+if [ -n ${PROFILE_FLAG}  ] ; then
+	echo "system first config for auto start up "
+	sleep 2
+	sed "1a #                          " -i ${START_UP_PROFILE}
+	sed "1a #                          " -i ${START_UP_PROFILE}
+	sed "1a #                          " -i ${START_UP_PROFILE}
+	sed "1a #Dynamic Domain Name cmd end" -i ${START_UP_PROFILE}
+	sed "1a #                          " -i ${START_UP_PROFILE}
+	sed "1a #                          " -i ${START_UP_PROFILE}
+	sed "1a #                          " -i ${START_UP_PROFILE}
+	sed "1a /bin/ddnsClient &" -i ${START_UP_PROFILE}
+	sed "1a #                          " -i ${START_UP_PROFILE}
+	sed "1a #                          " -i ${START_UP_PROFILE}
+	sed "1a #                          " -i ${START_UP_PROFILE}
+	sed "1a #Dynamic Domain Name cmd start" -i ${START_UP_PROFILE}
+	sed "1a #                          " -i ${START_UP_PROFILE}
+	sed "1a #                          " -i ${START_UP_PROFILE}
+	sed "1a #                          " -i ${START_UP_PROFILE}
+#	echo "/bin/ddnsClient &"  >> ${START_UP_PROFILE}
+#	echo "touch /ddnsok"  >> ${START_UP_PROFILE}
+#	chmod +x ${START_UP_PROFILE}
+else
+	echo "not first install and do nothing"
+fi
+echo "start app and use ps aux |grep ddnsClient to check the app state"
+sleep 1
+killall ddnsClient
+/bin/ddnsClient & >> /dev/null 
+sleep 3
+echo
+echo
+echo
+echo "install complete and enjoy it!!!!!!!!!!!!!!!!!"
+echo
+echo
+echo
+echo
+echo
+exit 0

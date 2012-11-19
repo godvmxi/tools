@@ -1,0 +1,17 @@
+LOG_DIR=/var/tmp/ddns/
+LOG="${LOG_DIR}ddns.log"
+mkdir -p ${LOG_DIR}
+while true ; do
+	date >> ${LOG}
+	IP1=`ifconfig ${NET_DEVICE}  | grep "inet " | awk  -F: '{ print $2 }' |awk '{ print $1 }'`
+	echo "ip --> $IP1 " >> ${LOG}
+	if [ -n "$IP1" ]; then
+		result=`curl http://${VICP_USER}:${VICP_PASS}@ddns.oray.com/ph/update\?hostname=${VICP_URL}\&myip=${IP1}`
+		echo "${NET_DEVICE} net ready ,and result --> ${result}" >> ${LOG}
+		sleep 180
+	else
+		echo "${NET_DEVICE} net not ready" >> ${LOG}
+		sleep 60
+	fi
+done
+
