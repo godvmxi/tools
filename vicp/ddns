@@ -7,10 +7,10 @@ while true ; do
 	echo "ip --> $IP1 " >> ${LOG}
 	if [ -n "$IP1" ]; then
 		result=`curl http://${VICP_USER}:${VICP_PASS}@ddns.oray.com/ph/update\?hostname=${VICP_URL}\&myip=${IP1}`
-		echo "${NET_DEVICE} net ready ,and result --> ${result}" >> ${LOG}
+		echo "${VICP_URL} <--> ${NET_DEVICE} net ready ,and result --> ${result}" >> ${LOG}
 		sleep 180
 	else
-		echo "${NET_DEVICE} net not ready" >> ${LOG}
+		echo "${VICP_URL} <--> ${NET_DEVICE}  net not ready" >> ${LOG}
 		sleep 60
 	fi
 done
