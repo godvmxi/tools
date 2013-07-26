@@ -102,3 +102,6 @@ set foldlevel=100
 
 "使用 Grep.vim 插件在工程内全局查找,设置快捷键。快捷键速记法:search in project
 nnoremap <Leader>s :Grep<CR>
+"使用python自动补全，使用Ctrl+x,Ctrl+o启动自动补全
+filetype plugin on  
+autocmd FileType python set omnifunc=pythoncomplete#Complete 
