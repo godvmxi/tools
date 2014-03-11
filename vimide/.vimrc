@@ -107,3 +107,5 @@ filetype plugin on
 autocmd FileType python set omnifunc=pythoncomplete#Complete 
 "not allowed open more than one MiniBufExplorer
 let g:miniBufExplorerMoreThanOne=0
+"enable mouse
+set mouse=a
