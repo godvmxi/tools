@@ -105,3 +105,5 @@ nnoremap <Leader>s :Grep<CR>
 "使用python自动补全，使用Ctrl+x,Ctrl+o启动自动补全
 filetype plugin on  
 autocmd FileType python set omnifunc=pythoncomplete#Complete 
+"not allowed open more than one MiniBufExplorer
+let g:miniBufExplorerMoreThanOne=0
