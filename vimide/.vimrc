@@ -109,3 +109,9 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 let g:miniBufExplorerMoreThanOne=0
 "enable mouse
 set mouse=a
+
+"set fileencodings=utf-8,gb2312,gbk,gb18030
+"set termencoding=utf-8
+"set fileformats=unix
+"set encoding=prc
+set fileformats=unix,dos
