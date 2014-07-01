@@ -115,3 +115,5 @@ set mouse=a
 "set fileformats=unix
 "set encoding=prc
 set fileformats=unix,dos
+"limit the each line length,make a notice line
+set colorcolumn=80

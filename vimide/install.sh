@@ -4,7 +4,9 @@
 echo "back up your vim config file"
 cp -rf ~/.vimrc  ~/vimrc.bak
 cp -rf ~/.vim/	 ~/vim.bak  
-cp -rf .vim/     ~/.vim/ 
-cp -rf .vimrc    ~/.vimrc
+rm -rf ~/.vimrc 
+rm -rf ~/.vim
+cp -rf vim/     ~/.vim 
+cp -rf vimrc    ~/.vimrc
 echo "install complete"
 
