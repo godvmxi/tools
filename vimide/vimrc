@@ -117,3 +117,11 @@ set mouse=a
 set fileformats=unix,dos
 "limit the each line length,make a notice line
 set colorcolumn=80
+"set vim DoxygenToolkit data ,use DoxLic DoxAuthor Dox to generate you comment
+let g:DoxygenToolkit_authorName="Bright.Jiang bright.jiang@infotmic.com.cn  godvmxi@126.com"
+let s:licenseTag = "Copyright(C)\infoTM "
+let s:licenseTag = s:licenseTag . "For Working\<enter>"
+let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
+let g:DoxygenToolkit_licenseTag = s:licenseTag
+let g:DoxygenToolkit_briefTag_funcName="yes"
+let g:doxygen_enhanced_color=1
